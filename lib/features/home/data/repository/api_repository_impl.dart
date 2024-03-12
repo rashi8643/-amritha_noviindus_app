@@ -35,6 +35,7 @@ class ApiRepositoryImpl implements ApiRepository {
           updatedAt: result.updatedAt,
         ),
     ];
+    return results;
   }
 }
 

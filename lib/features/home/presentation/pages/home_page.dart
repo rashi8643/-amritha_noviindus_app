@@ -4,6 +4,7 @@ import 'package:novi_indus_test/core/constants/home_constants.dart';
 import 'package:novi_indus_test/core/theme/app_theme.dart';
 import 'package:novi_indus_test/core/widgets/button_widget.dart';
 import 'package:novi_indus_test/core/widgets/text_field_widget.dart';
+import 'package:novi_indus_test/features/home/presentation/provider/home_provider.dart';
 import 'package:novi_indus_test/features/home/presentation/widgets/listview_widge.dart';
 
 class HomePage extends ConsumerWidget {
@@ -26,7 +27,32 @@ class HomePage extends ConsumerWidget {
               iconData: Icon(Icons.search),
               controller: searchController,
             ),
-            ListViewWidget(),
+            ref.watch(homeProvider).isRefreshing
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : ref.watch(homeProvider) == null
+                    ? const Text('NO DATA')
+                    : switch (ref.watch(homeProvider)) {
+                        AsyncData(:final value) => ListViewWidget(
+                            entity: value!,
+                          ),
+                        AsyncError(:final error, :final stackTrace) => Center(
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: theme.colors.secondary),
+                              onPressed: () {
+                                ref.invalidate(homeProvider);
+                              },
+                              child: Text(
+                                'Retry',
+                              ),
+                            ),
+                          ),
+                        _ => const Center(
+                            child: CircularProgressIndicator(),
+                          )
+                      }
           ],
         ),
       ),

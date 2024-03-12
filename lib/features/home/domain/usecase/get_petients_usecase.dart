@@ -7,7 +7,7 @@ final class GetPatintsUsecase {
 
   Future<List<PatientEntity>?> call() async {
     try {
-      return repository.getDatas();
+      return await repository.getDatas();
     } catch (e) {
       throw Exception('Error');
     }
