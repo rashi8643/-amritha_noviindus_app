@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:novi_indus_test/core/constants/api_constants.dart';
+import 'package:novi_indus_test/core/exception/api/api_excpetion.dart';
 import 'package:novi_indus_test/features/login/data/data_source/login_data_source.dart';
 import 'package:novi_indus_test/features/login/data/model/login_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -11,7 +12,7 @@ class LoginDataSourceImpl implements LoginDataSource {
   static const link = ApiConstants.baseUrl;
   static const loginLink = ApiConstants.login;
   @override
-  Future<LoginModel?> login(String name, String pass) async {
+  Future<LoginModel> login(String name, String pass) async {
     try {
       final data = FormData.fromMap(
         {
@@ -22,11 +23,12 @@ class LoginDataSourceImpl implements LoginDataSource {
 
       final response = await dio.post(link + loginLink, data: data);
       if (response.statusCode == 200) {
-        return await response.data;
+        return LoginModel.fromJson(response.data);
+      } else {
+        throw ApiException(statusCode: response.statusCode.toString());
       }
-      return null;
-    } catch (e) {
-      throw Exception('Data Not found');
+    } on DioException catch (_) {
+      rethrow;
     }
   }
 }

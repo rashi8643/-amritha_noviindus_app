@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:novi_indus_test/core/theme/app_theme.dart';
 
-class LoginSubTitleWidget extends StatelessWidget {
+class SubTitleWidget extends StatelessWidget {
   final String title;
-  const LoginSubTitleWidget({super.key, required this.title});
+  const SubTitleWidget({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {

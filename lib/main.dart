@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:novi_indus_test/core/theme/light_theme.dart';
+import 'package:novi_indus_test/features/home/presentation/pages/home_page.dart';
 import 'package:novi_indus_test/features/login/presentation/pages/login_page.dart';
+import 'package:novi_indus_test/features/login/presentation/provider/auth_redirect_provider.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -15,7 +19,19 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ref.watch(lightThemeProvider),
-      home: LoginPage(),
+      home: switch (ref.watch(authRedirectProvider)) {
+        AsyncData(:final value) => value,
+        AsyncError(:final error) => Scaffold(
+            body: Center(
+              child: Text("$error"),
+            ),
+          ),
+        _ => const Scaffold(
+            body: Center(
+              child: Text("Splash Screen"),
+            ),
+          )
+      },
     );
   }
 }

@@ -1,13 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:novi_indus_test/core/constants/login_constants.dart';
 import 'package:novi_indus_test/core/theme/app_theme.dart';
 import 'package:novi_indus_test/core/widgets/button_widget.dart';
-import 'package:novi_indus_test/features/home/presentation/pages/home_page.dart';
+import 'package:novi_indus_test/features/login/presentation/provider/login_provider.dart';
 import 'package:novi_indus_test/features/login/presentation/widgets/login_image_widget.dart';
-import 'package:novi_indus_test/features/login/presentation/widgets/login_sub_title_widgets.dart';
+import 'package:novi_indus_test/core/widgets/sub_title_widgets.dart';
 import 'package:novi_indus_test/features/login/presentation/widgets/login_title_widget.dart';
 import 'package:novi_indus_test/core/widgets/text_field_widget.dart';
 
@@ -16,23 +14,24 @@ class LoginPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userController = TextEditingController();
-    final passController = TextEditingController();
+    final userController = ref.read(loginProvider.notifier).userNameController;
+    final passController = ref.read(loginProvider.notifier).passwordController;
     final theme = AppTheme.of(context);
     final appConstants = ref.watch(loginConstantsProvider);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            LoginImageWidget(),
+            const LoginImageWidget(),
             SizedBox(
               height: theme.spaces.space_400,
             ),
-            LoginTitleWidget(),
+            const LoginTitleWidget(),
             SizedBox(
               height: theme.spaces.space_400,
             ),
-            LoginSubTitleWidget(
+            SubTitleWidget(
               title: appConstants.txtuserName,
             ),
             SizedBox(
@@ -40,7 +39,7 @@ class LoginPage extends ConsumerWidget {
             ),
             TextFieldWidget(
               controller: userController,
-              iconData: Icon(
+              iconData: const Icon(
                 Icons.person,
               ),
               labelText: appConstants.txtEnterUserName,
@@ -48,7 +47,7 @@ class LoginPage extends ConsumerWidget {
             SizedBox(
               height: theme.spaces.space_300,
             ),
-            LoginSubTitleWidget(
+            SubTitleWidget(
               title: appConstants.txtPassword,
             ),
             SizedBox(
@@ -56,7 +55,7 @@ class LoginPage extends ConsumerWidget {
             ),
             TextFieldWidget(
               controller: passController,
-              iconData: Icon(
+              iconData: const Icon(
                 Icons.lock,
               ),
               labelText: appConstants.txtEnterPass,
@@ -66,14 +65,22 @@ class LoginPage extends ConsumerWidget {
             ),
             ButtonWidget(
               buttonName: appConstants.txtLogin,
-              onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HomePage(),
-                    ),
-                    (route) => false);
-              },
+              onPressed: ref.watch(loginProvider).isLoading
+                  ? null
+                  : () {
+                      if (userController.text.isNotEmpty &&
+                          passController.text.isNotEmpty) {
+                        ref.read(loginProvider.notifier).login(context);
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content:
+                                Text("Username and Password can't be empty"),
+                            backgroundColor: Colors.redAccent,
+                          ),
+                        );
+                      }
+                    },
             ),
           ],
         ),

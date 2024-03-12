@@ -4,6 +4,7 @@ import 'package:novi_indus_test/core/constants/home_constants.dart';
 import 'package:novi_indus_test/core/theme/app_theme.dart';
 import 'package:novi_indus_test/core/widgets/button_widget.dart';
 import 'package:novi_indus_test/core/widgets/text_field_widget.dart';
+import 'package:novi_indus_test/features/home/presentation/pages/registeration_page.dart';
 import 'package:novi_indus_test/features/home/presentation/provider/home_provider.dart';
 import 'package:novi_indus_test/features/home/presentation/widgets/listview_widge.dart';
 
@@ -17,14 +18,14 @@ class HomePage extends ConsumerWidget {
     final constants = ref.watch(homeConstantsProvider);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Page'),
+        title: const Text('Home Page'),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             TextFieldWidget(
               labelText: constants.txtSearchField,
-              iconData: Icon(Icons.search),
+              iconData: const Icon(Icons.search),
               controller: searchController,
             ),
             ref.watch(homeProvider).isRefreshing
@@ -44,7 +45,7 @@ class HomePage extends ConsumerWidget {
                               onPressed: () {
                                 ref.invalidate(homeProvider);
                               },
-                              child: Text(
+                              child: const Text(
                                 'Retry',
                               ),
                             ),
@@ -57,8 +58,16 @@ class HomePage extends ConsumerWidget {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton:
-          ButtonWidget(buttonName: constants.txtRegister, onPressed: () {}),
+      floatingActionButton: ButtonWidget(
+          buttonName: constants.txtRegister,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const RegisterationPage(),
+              ),
+            );
+          }),
     );
   }
 }
