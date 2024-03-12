@@ -6,8 +6,6 @@ part 'api_model.g.dart';
 
 ApiModel apiModelFromJson(String str) => ApiModel.fromJson(json.decode(str));
 
-String apiModelToJson(ApiModel data) => json.encode(data.toJson());
-
 @freezed
 class ApiModel with _$ApiModel {
   const factory ApiModel({
