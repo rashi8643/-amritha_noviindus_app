@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:novi_indus_test/core/constants/home_constants.dart';
 import 'package:novi_indus_test/core/theme/app_theme.dart';
 import 'package:novi_indus_test/core/widgets/button_widget.dart';
-import 'package:novi_indus_test/core/widgets/text_field_widget.dart';
 import 'package:novi_indus_test/features/home/presentation/pages/registeration_page.dart';
 import 'package:novi_indus_test/features/home/presentation/provider/home_provider.dart';
+import 'package:novi_indus_test/features/home/presentation/widgets/container_widget.dart';
 import 'package:novi_indus_test/features/home/presentation/widgets/listview_widge.dart';
 
 class HomePage extends ConsumerWidget {
@@ -22,11 +22,27 @@ class HomePage extends ConsumerWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextFieldWidget(
-              labelText: constants.txtSearchField,
-              iconData: const Icon(Icons.search),
-              controller: searchController,
+            ContainerWidget(
+              text: constants.txtShowBranches,
+              onTap: () {},
+            ),
+            ContainerWidget(
+              text: constants.txtShowTreatments,
+              onTap: () {},
+            ),
+            SizedBox(
+              height: theme.spaces.space_200,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: theme.spaces.space_300),
+              child: Text(
+                constants.txtPatientDetails,
+                style: theme.typography.h600.copyWith(
+                  fontSize: theme.spaces.space_250,
+                ),
+              ),
             ),
             ref.watch(homeProvider).isRefreshing
                 ? const Center(

@@ -3,13 +3,9 @@ import 'package:novi_indus_test/core/theme/app_theme.dart';
 
 class TextFieldWidget extends StatelessWidget {
   final String labelText;
-  final Icon iconData;
   final TextEditingController controller;
   const TextFieldWidget(
-      {super.key,
-      required this.labelText,
-      required this.iconData,
-      required this.controller});
+      {super.key, required this.labelText, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +22,6 @@ class TextFieldWidget extends StatelessWidget {
           filled: true,
           labelText: labelText,
           labelStyle: TextStyle(color: colors.textSubtle),
-          prefixIcon: iconData,
           border: OutlineInputBorder(
             borderSide: BorderSide(
               color: colors.textInverse,

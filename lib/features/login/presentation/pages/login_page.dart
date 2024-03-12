@@ -39,9 +39,6 @@ class LoginPage extends ConsumerWidget {
             ),
             TextFieldWidget(
               controller: userController,
-              iconData: const Icon(
-                Icons.person,
-              ),
               labelText: appConstants.txtEnterUserName,
             ),
             SizedBox(
@@ -55,9 +52,6 @@ class LoginPage extends ConsumerWidget {
             ),
             TextFieldWidget(
               controller: passController,
-              iconData: const Icon(
-                Icons.lock,
-              ),
               labelText: appConstants.txtEnterPass,
             ),
             SizedBox(
