@@ -72,28 +72,28 @@ class AppTypographyExtension extends ThemeExtension<AppTypographyExtension> {
             color: dimFontColor, fontSize: 14, height: 1.5, letterSpacing: 0),
         h100 = TextStyle(
             color: dimFontColor,
-            fontWeight: FontWeight.w700,
+            fontWeight: FontWeight.w100,
             fontSize: 11,
             letterSpacing: 0),
         h200 = TextStyle(
             color: dimFontColor,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w200,
             fontSize: 12,
             letterSpacing: 0),
         h300 = TextStyle(
           color: defaultFontColor,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w300,
           fontSize: 12,
           letterSpacing: 0,
         ),
         h400 = TextStyle(
             color: defaultFontColor,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w400,
             fontSize: 14,
             letterSpacing: 0),
         h500 = TextStyle(
             color: defaultFontColor,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w500,
             fontSize: 16,
             letterSpacing: 0),
         h600 = TextStyle(
@@ -103,22 +103,22 @@ class AppTypographyExtension extends ThemeExtension<AppTypographyExtension> {
             letterSpacing: 0),
         h700 = TextStyle(
             color: defaultFontColor,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w700,
             fontSize: 24,
             letterSpacing: 0),
         h800 = TextStyle(
             color: defaultFontColor,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w800,
             fontSize: 29,
             letterSpacing: 0),
         h900 = TextStyle(
             color: Colors.black,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w900,
             fontSize: 35,
             letterSpacing: 0),
         h1000 = TextStyle(
             color: defaultFontColor,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w700,
             fontSize: 48,
             letterSpacing: 0);
 
