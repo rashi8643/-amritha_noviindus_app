@@ -5,7 +5,7 @@ final class GetPatintsUsecase {
   final ApiRepository repository;
   GetPatintsUsecase({required this.repository});
 
-  Future<List<PatientEntity>?> call() async {
+  Future<List<PatientEntity>> call() async {
     try {
       return await repository.getDatas();
     } catch (e) {

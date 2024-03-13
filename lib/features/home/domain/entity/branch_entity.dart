@@ -5,7 +5,6 @@ part 'branch_entity.freezed.dart';
 @freezed
 class BranchEntity with _$BranchEntity {
   const factory BranchEntity({
-    // ignore: invalid_annotation_target
     required int id,
     required String name,
     required int patientsCount,

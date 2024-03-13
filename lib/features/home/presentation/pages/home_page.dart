@@ -4,7 +4,9 @@ import 'package:novi_indus_test/core/constants/home_constants.dart';
 import 'package:novi_indus_test/core/theme/app_theme.dart';
 import 'package:novi_indus_test/core/widgets/button_widget.dart';
 import 'package:novi_indus_test/features/home/presentation/pages/registeration_page.dart';
-import 'package:novi_indus_test/features/home/presentation/provider/home_provider.dart';
+import 'package:novi_indus_test/features/home/presentation/pages/show_branches_page.dart';
+import 'package:novi_indus_test/features/home/presentation/pages/show_treatment_page.dart';
+import 'package:novi_indus_test/features/home/presentation/provider/patient_provider.dart';
 import 'package:novi_indus_test/features/home/presentation/widgets/container_widget.dart';
 import 'package:novi_indus_test/features/home/presentation/widgets/listview_widge.dart';
 
@@ -14,11 +16,16 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = AppTheme.of(context);
-    final searchController = TextEditingController();
     final constants = ref.watch(homeConstantsProvider);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Page'),
+        title: Padding(
+          padding: EdgeInsets.only(left: theme.spaces.space_100),
+          child: Text(
+            constants.txtHome,
+            style: theme.typography.h600.copyWith(fontSize: 24),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -26,11 +33,25 @@ class HomePage extends ConsumerWidget {
           children: [
             ContainerWidget(
               text: constants.txtShowBranches,
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ShowBranchPage(),
+                  ),
+                );
+              },
             ),
             ContainerWidget(
               text: constants.txtShowTreatments,
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ShowTreatmentPage(),
+                  ),
+                );
+              },
             ),
             SizedBox(
               height: theme.spaces.space_200,
@@ -44,13 +65,13 @@ class HomePage extends ConsumerWidget {
                 ),
               ),
             ),
-            ref.watch(homeProvider).isRefreshing
+            ref.watch(patientProvider).isRefreshing
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
-                : ref.watch(homeProvider) == null
+                : ref.watch(patientProvider) == null
                     ? const Text('NO DATA')
-                    : switch (ref.watch(homeProvider)) {
+                    : switch (ref.watch(patientProvider)) {
                         AsyncData(:final value) => ListViewWidget(
                             entity: value!,
                           ),
@@ -59,7 +80,7 @@ class HomePage extends ConsumerWidget {
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: theme.colors.secondary),
                               onPressed: () {
-                                ref.invalidate(homeProvider);
+                                ref.invalidate(patientProvider);
                               },
                               child: const Text(
                                 'Retry',

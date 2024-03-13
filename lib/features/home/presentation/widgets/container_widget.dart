@@ -39,7 +39,7 @@ class ContainerWidget extends ConsumerWidget {
                 text,
                 style: theme.typography.h500.copyWith(
                   fontSize: theme.spaces.space_250,
-                  color: theme.colors.textSubtlest,
+                  color: theme.colors.primary,
                 ),
               ),
             ],

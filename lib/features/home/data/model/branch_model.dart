@@ -8,6 +8,7 @@ part 'branch_model.g.dart';
 @freezed
 class BranchModel with _$BranchModel {
   const factory BranchModel({
+    // ignore: duplicate_ignore
     // ignore: invalid_annotation_target
     @JsonKey(name: "id") required int id,
     @JsonKey(name: "name") required String name,

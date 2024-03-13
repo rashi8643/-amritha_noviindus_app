@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:novi_indus_test/core/constants/api_constants.dart';
+import 'package:novi_indus_test/core/exception/api/api_excpetion.dart';
 import 'package:novi_indus_test/features/home/data/data_source/api_services_data_source.dart';
 import 'package:novi_indus_test/features/home/data/model/api_model.dart';
 import 'package:novi_indus_test/features/home/data/model/branch_model.dart';
 import 'package:novi_indus_test/features/home/data/model/treatment_model.dart';
-import 'package:novi_indus_test/features/home/domain/entity/patient_entity.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'api_services_data_source_impl.g.dart';
@@ -19,7 +19,7 @@ class ApiServicesDataSourceImpl implements ApiServicesDataSource {
 
   ///get patients data
   @override
-  Future<List<Patient>?> getDatas() async {
+  Future<List<Patient>> getDatas() async {
     try {
       dio.options.headers["Authorization"] = tocken;
       final response = await dio.get(link + patientLink);
@@ -32,16 +32,17 @@ class ApiServicesDataSourceImpl implements ApiServicesDataSource {
           );
         }
         return datas;
+      } else {
+        throw ApiException(statusCode: response.statusCode.toString());
       }
-      return null;
-    } catch (e) {
-      throw Exception('Api not found');
+    } on Exception catch (_) {
+      rethrow;
     }
   }
 
   ///get branches data
   @override
-  Future<List<BranchModel>?> getBranches() async {
+  Future<List<BranchModel>> getBranches() async {
     try {
       dio.options.headers["Authorization"] = tocken;
       final response = await dio.get(link + branchLink);
@@ -54,16 +55,17 @@ class ApiServicesDataSourceImpl implements ApiServicesDataSource {
           );
         }
         return datas;
+      } else {
+        throw ApiException(statusCode: response.statusCode.toString());
       }
-      return null;
-    } catch (e) {
-      throw Exception('Api not found');
+    } on Exception catch (_) {
+      rethrow;
     }
   }
 
   ///get treatment data
   @override
-  Future<List<Treatment>?> getTeatemetns() async {
+  Future<List<Treatment>> getTeatemetns() async {
     try {
       dio.options.headers["Authorization"] = tocken;
       final response = await dio.get(link + treatmentLink);
@@ -76,10 +78,11 @@ class ApiServicesDataSourceImpl implements ApiServicesDataSource {
           );
         }
         return datas;
+      } else {
+        throw ApiException(statusCode: response.statusCode.toString());
       }
-      return null;
-    } catch (e) {
-      throw Exception('Api not found');
+    } on Exception catch (_) {
+      rethrow;
     }
   }
 }

@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'home_constants.g.dart';
 
 class HomeConstants {
-  final String txtSearch = 'Search';
+  final String txtHome = 'Home';
   final String txtSearchField = 'Search for treatment';
   final String txtViewBooking = 'View Booking Details';
   final String txtRegister = 'Register Now';
@@ -27,6 +26,8 @@ class HomeConstants {
   final String txtShowBranches = 'Show Branches';
   final String txtShowTreatments = 'Show Treatments';
   final String txtPatientDetails = 'Patient Details';
+  final String txtTreatmnts = 'Treatments';
+  final String txtBranches = 'Branches';
 }
 
 @riverpod

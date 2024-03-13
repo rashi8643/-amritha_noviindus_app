@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:novi_indus_test/core/theme/light_theme.dart';
+import 'package:novi_indus_test/core/widgets/splash_screen.dart';
 import 'package:novi_indus_test/features/login/presentation/provider/auth_redirect_provider.dart';
 
 void main() {
@@ -22,11 +23,7 @@ class MyApp extends ConsumerWidget {
               child: Text("$error"),
             ),
           ),
-        _ => const Scaffold(
-            body: Center(
-              child: Text("Splash Screen"),
-            ),
-          )
+        _ => const SplashSrceen(),
       },
     );
   }
