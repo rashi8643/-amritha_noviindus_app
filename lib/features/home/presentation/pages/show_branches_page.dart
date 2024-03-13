@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:novi_indus_test/core/constants/home_constants.dart';
 import 'package:novi_indus_test/core/theme/app_theme.dart';
 import 'package:novi_indus_test/features/home/presentation/provider/branch_provider.dart';
 import 'package:novi_indus_test/features/home/presentation/widgets/braches_widget.dart';
@@ -10,9 +11,13 @@ class ShowBranchPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = AppTheme.of(context);
+    final constants = ref.watch(homeConstantsProvider);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Branches"),
+        title: Text(
+          constants.txtBranches,
+          style: theme.typography.h600.copyWith(fontSize: 24),
+        ),
       ),
       body: ref.watch(branchProvider).isRefreshing
           ? const Center(
